@@ -1,5 +1,9 @@
 # Career Recommendation Website
 
+## 🎥 Demo Video
+![Demo Video](demo.mp4)
+
+
 A Django-based web application that helps users explore various career paths based on their interests and skills.
 
 ##  Features
