@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career List</title>
+    
+    <!-- Bootstrap CSS for Styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <div class="container text-center">
+        <h1 class="mb-4">Career Categories</h1>
+        <div class="row">
+            {% for career in careers %}
+                <div class="col-md-4 mb-3">
+                    <div class="career-card p-3 border rounded shadow-sm">
+                        {% if career.image %}
+                            <img src="{{ career.image.url }}" alt="{{ career.name }}" class="img-fluid rounded career-img">
+                        {% else %}
+                            {% if career.category == "Medical" %}
+                                <img src="{% static 'images/medicine.jpg' %}" alt="Medical" class="card-img-top">
+                                <p class="card-text">Explore various medical fields and top medical colleges.</p>
+
+                            {% elif career.category == "Engineering" %}
+                            <img src="{% static 'images/engineering.jpg' %}"  alt="Engineering" class="card-img-top">
+                            <p class="card-text">Explore various engineering fields and top colleges.</p>
+
+                            {% elif career.category == "Law" %}
+                                <img src="{% static 'images/law.jpg' %}" alt="Law" class="card-img-top">
+                                <p class="card-text">Pursue a career in law and explore the best law colleges.</p>
+
+                            {% elif career.category == "CA" %}
+                                <img src="{% static 'images/ca.jpg' %}" alt="CA" class="card-img-top">
+                                <p class="card-text">Discover career opportunities in Chartered Accountancy.</p>
+
+
+                            {% elif career.category == "Lecturer" %}
+                                <img src="{% static 'images/lecturer.jpg' %}" alt="Lecturer" class="card-img-top">
+                                p class="card-text">Shape young minds by becoming a lecturer in your field.</p>
+
+                            {% else %}
+                                <img src="{% static 'images/default.jpg' %}" alt="Default Career Image" class="card-img-top">
+                                <p class="card-text">Explore various career paths and opportunities.</p>
+                            {% endif %}
+                        {% endif %}
+                        
+                        <h5 class="mt-2">{{ career.name }}</h5>
+                        <a href="{% url 'career_detail' career.pk %}" class="btn btn-dark mt-2">View Details</a>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No careers available.</p>
+            {% endfor %}
+        </div>
+
+        <a href="/" class="back-btn">Back to Home</a>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+

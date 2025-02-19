@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ career.name }} - Career Details</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        body {
+            background-color: #ccd0d4;
+            color: #333;
+        }
+        .career-card {
+            transition: 0.3s;
+            border-radius: 10px;
+        }
+        .career-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .career-header {
+            background: linear-gradient(135deg, #969bab, #444750);
+            color: rgb(246, 243, 243);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .career-sidebar {
+            background: rgb(233, 227, 227);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .career-content {
+            background:  rgb(233, 227, 227);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Career Explorer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'career_detail' career.id %}">Careers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                    <li class="nav-item"><a class="btn btn-primary" href="{% url 'login' %}">Login</a></li>                    
+            </div>
+        </div>
+    </nav>
+    <!-- Career Details Section -->
+    <section class="container mt-5">
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-md-8">
+                <div class="career-header">
+                    <h1>{{ career.name }}</h1>
+                    <p class="text-light"><b>Category:</b> {{ career.category }}</p>
+                </div>
+
+                <div class="career-content mt-4">
+                    <h3>Overview</h3>
+                    <p>{{ career.details.description }}</p>
+
+                    <h5 class="mt-4"><b>Salary Range:</b></h5>
+                    <p>{{ career.details.salary_range }}</p>
+
+                    <ul>
+                        {% for skill in career.details.skills_required.splitlines %}
+                            <li>{{ skill }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <h5 class="mt-4"><b>Recommended Courses:</b></h5>
+                    <ul>
+                        {% for course in career.details.required_courses.splitlines %}
+                            <li>{{ course }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <h5 class="mt-4"><b>Top Colleges:</b></h5>
+                    {% if career.top_colleges %}
+                        <ul>
+                            {% for college in career.top_colleges.all %}
+                                <li><b>{{ college.name }}</b> - {{ college.location }} (<a href="{{ college.website }}" target="_blank">Website</a>)</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No colleges listed for this career.</p>
+                    {% endif %}
+                </div>
+
+                <!-- Related Careers -->
+                <h3 id=relate class="mt-4">Related Careers</h3>
+                <div class="row">
+                    {% for related in related_careers %}
+                        <div class="col-md-4">
+                            <a href="{% url 'career_detail' related.id %}" class="text-decoration-none">
+                                <div class="card career-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ related.name }}</h5>
+                                        <p class="text-muted">{{ related.category }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-md-4">
+                <div class="career-sidebar">
+                    <h4>Career Quick Facts</h4>
+                    <p><b>Category:</b> {{ career.category }}</p>
+                    <p><b>Salary:</b> {{ career.details.salary_range }}</p>
+                    <p><b>Job Opportunities:</b> {{ career.details.job_opportunities }}</p>
+
+                    <button class="btn btn-warning w-100 mt-3" onclick="history.back()">Back to Careers</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Career Explorer. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

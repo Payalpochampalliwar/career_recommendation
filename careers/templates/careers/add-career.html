@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Career</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Add a New Career</h1>
+    <form id="career-form">
+        <input type="text" id="name" placeholder="Career Name" required>
+        <input type="text" id="category" placeholder="Category" required>
+        <textarea id="description" placeholder="Description" required></textarea>
+        <input type="text" id="salary" placeholder="Salary Range" required>
+        <input type="text" id="courses" placeholder="Required Courses" required>
+        <input type="text" id="skills" placeholder="Skills Required" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById("career-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Please login first.");
+                return;
+            }
+
+            const careerData = {
+                name: document.getElementById("name").value,
+                category: document.getElementById("category").value,
+                details: {
+                    description: document.getElementById("description").value,
+                    salary_range: document.getElementById("salary").value,
+                    required_courses: document.getElementById("courses").value,
+                    skills_required: document.getElementById("skills").value
+                }
+            };
+
+            const response = await fetch("http://127.0.0.1:8000/api/careers/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(careerData)
+            });
+
+            if (response.ok) {
+                alert("Career added successfully!");
+                window.location.href = "index.html";
+            } else {
+                alert("Failed to add career.");
+            }
+        });
+    </script>
+</body>
+</html>

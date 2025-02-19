@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Explorer</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Career Explorer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#careers">Careers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="btn btn-primary ms-3" href="{% url 'login' %}">Login</a></li>                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- 1. Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1 class="display-4">Discover Your Dream Career!</h1>
+        <p class="lead">Explore career opportunities and find the right path for you.</p>
+        <a href="{% url 'career-list' %}" class="btn btn-warning btn-lg">Get Started</a>
+    </div>
+</section>
+
+<!-- 2. Search Bar -->
+<section id="search" class="container my-5 p-5" style="background: #b0b0b0; color: rgb(4, 4, 4); border-radius: 80px;">
+    <h2 class="text-center mb-4">Search Careers</h2>
+    <form class="search-bar mx-auto text-center" action="{% url 'search_careers' %}" method="GET">
+        <input type="text" name="q" class="form-control form-control-lg w-50 d-inline" 
+               placeholder="Search for careers..." style="background: #fff7f7; color: rgb(0, 0, 0); border: 1px solid #a09d9d;">
+        <button type="submit" class="btn btn-light btn-lg mt-2">Search</button>
+    </form>
+</section>
+
+<!-- 3. About -->
+<section id="about" class="section">
+    <h2>About Us</h2>
+    <p>Welcome to Career Explorer – Your Guide to a Brighter Future!</p>
+    <p> The right career path can be overwhelming, especially after 10th and 12th grade. Students and parents often struggle to find accurate and reliable career information. That's where Career Explorer comes in!</p>
+    
+    <p> Platform provides detailed career insights, helping students make informed decisions based on their interests, skills, and future goals.</p>
+    <div style="margin-bottom: 15px;"></div>
+
+  <h1>What We Offer</h1>
+    <p>✅ Comprehensive Career Information – Explore different career paths, salary insights, required skills, and job opportunities.</p>
+    <p>✅ Stream & Course Guidance – Understand which streams (Science, Commerce, Arts) lead to which careers.</p>
+    <p>✅ Top Colleges & Exams – Find the best colleges and entrance exams for your desired career.</p>
+    <p>✅ Skill Development Resources – Learn about additional courses and certifications that enhance career prospects.</p>
+    <p>✅ Expert Advice & FAQs – Get answers to commonly asked career-related questions.</p>
+    <div style="margin-bottom: 15px;"></div>
+
+  <h1> Why Choose Career Explorer?</h1>
+    <p>🔹 Free & Accessible – 100% free platform with no subscription required.</p>
+    <p>🔹 Well-Researched Data – Career details based on real industry insights.</p>
+    <p>🔹 User-Friendly Interface – Simple and intuitive design for easy career search.</p>
+    <p>🔹 Regular Updates – We keep our database updated with the latest career trends.</p>
+</section>
+<div style="margin-bottom: 15px;"></div>
+
+<!-- 3. Responsive Image Slider (Carousel) -->
+<section id="slider" class="container my-5">
+    <div id="careerCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/slider/future_work.jpg' %}" class="d-block w-100" alt="Future of Work">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/slider/graduation_success.jpg' %}" class="d-block w-100" alt="Graduation Success">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/slider/collaboration_teamwork.jpg' %}" class="d-block w-100" alt="Collaboration & Teamwork">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/slider/career_growth.jpg' %}" class="d-block w-100" alt="Career Growth">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/slider/work_life_balance.jpg' %}" class="d-block w-100" alt="Work-Life Balance">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#careerCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#careerCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</section>
+
+<!-- 4. Testimonials -->
+<section class="testimonial">
+    <div class="container">
+        <h2 class="text-center mb-4">What Our Users Say</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <blockquote class="blockquote">
+                    <p>"This platform helped me choose the right career! Highly recommended."</p>
+                    <footer class="blockquote-footer">Amit Sharma</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-6">
+                <blockquote class="blockquote">
+                    <p>"The best career guidance website I've ever used!Career Explorer is best."</p>
+                    <footer class="blockquote-footer">Priya Patel</footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 5. Statistics Section -->
+<section class="stats text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>500+</h2>
+                <p>Career Paths</p>
+            </div>
+            <div class="col-md-4">
+                <h2>1,000+</h2>
+                <p>Students Guided</p>
+            </div>
+            <div class="col-md-4">
+                <h2>100+</h2>
+                <p>Expert Insights</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. Featured Career Categories -->
+<section id="careers" class="section bg-light">
+    <h2>Career Selection</h2>
+    <p>Explore different career paths and find the best fit for you.</p>
+    <a href="{% url 'career_list' %}" class="btn-custom">View Careers</a>
+</section>
+
+<!-- 7. contact us -->
+<section id="contact" class="section">
+    <h2 class="text-center">Contact Us</h2>
+    <div class="container">
+        <div class="row">
+            <!-- Left Side - Text Section -->
+            <div class="col-md-6 d-flex align-items-center">
+                <div class="contact-info">
+                    <h1>Get in Touch</h1>
+                    <p>We’d love to hear from you! If you have any questions or suggestions, feel free to contact us at:</p>
+                    <p>📩 Email: support@careerexplorer.com</p>
+                    <p>🚀 Start your journey today with Career Explorer and take the first step towards a bright future! 🚀</p>
+                </div>
+            </div>
+
+            <!-- Right Side - Contact Form -->
+            <div class="col-md-6 d-flex justify-content-center">
+                <div class="contact-box p-4">
+                    <form action="/action_page.php">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+                        <label for="country">Country</label>
+                        <select id="country" name="country">
+                            <option value="australia">Australia</option>
+                            <option value="canada">Canada</option>
+                            <option value="usa">USA</option>
+                            <option value="india">India</option>
+                        </select>
+
+                        <label for="subject">Subject</label>
+                        <textarea id="subject" name="subject" placeholder="Write something.."></textarea>
+
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Career Explorer. All Rights Reserved.</p>
+</footer>
+
+<!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+<!-- Smooth Scrolling Script -->
+<script>
+    $(document).ready(function(){
+        $("a.nav-link").on('click', function(event) {
+            if (this.hash !== "") {
+                event.preventDefault();
+                var hash = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top - 70
+                }, 800);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
+
+
