@@ -1,28 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("🚀 Page Loaded!");
+    const form = document.querySelector("form");
 
-  const form = document.querySelector("form");
-  const usernameField = document.getElementById("username");
-  const passwordField = document.getElementById("password");
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
 
-  if (!form) {
-      console.error("❌ Form not found!");
-      return;
-  }
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
 
-  if (!usernameField || !passwordField) {
-      console.error("❌ Username or Password field not found!");
-      return;
-  }
+        if (username === "" || password === "") {
+            alert("Please enter both username and password!");
+            return;
+        }
 
-  form.addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent default form submission for debugging
-
-      console.log("📩 Form Submitted!");
-      console.log("Username:", usernameField.value);
-      console.log("Password:", passwordField.value);
-
-      this.submit(); // Manually submit the form
-  });
+        // Simulate authentication (Replace with real authentication logic)
+        if (username === "admin" && password === "admin123") {
+            alert("Login Successful!");
+            window.location.href = "dashboard.html"; // Redirect to the dashboard page
+        } else {
+            alert("Invalid credentials. Try again.");
+        }
+    });
 });
-
